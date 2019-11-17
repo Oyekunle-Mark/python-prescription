@@ -6,6 +6,5 @@ from resources.Diagnosis import DiagnosisResource
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp)
 
-# Routes
-
+# setup the route
 api.add_resource(DiagnosisResource, '/diagnosis')

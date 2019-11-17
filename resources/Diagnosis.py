@@ -68,9 +68,11 @@ class DiagnosisResource(Resource):
         print("******", data)
         diagnosis = Diagnosis.query.filter_by(id=data['id']).first()
 
+        # if no diagosis matches
         if not diagnosis:
             return {'message': 'diagnosis does not exist'}, 400
 
+        # update the diagnosis
         diagnosis.category_code = data['category_code'],
         diagnosis.diagnosis_code = data['diagnosis_code']
         diagnosis.full_code = data['full_code']
@@ -89,11 +91,14 @@ class DiagnosisResource(Resource):
         Handles delete requests
         """
         json_data = request.get_json(force=True)
+
+        # if request body is empty
         if not json_data:
             return {'message': 'No input data provided'}, 400
 
         data, errors = diagnosis_schema.load(json_data)
-
+        
+        # if error loading the data
         if errors:
             return errors, 422
 

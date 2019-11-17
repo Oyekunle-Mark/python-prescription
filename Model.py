@@ -9,14 +9,19 @@ db = SQLAlchemy()
 
 
 class Diagnosis(db.Model):
+    """
+    Creates the diagnosis model
+    """
     __tablename__ = 'diagnosis'
     id = db.Column(db.Integer, primary_key=True)
     category_code = db.Column(db.String(50), nullable=False)
     diagnosis_code = db.Column(db.String(50), nullable=False)
+    # the full code is empty
     full_code = db.Column(db.String(50), unique=True, nullable=False)
     abbreviated_description = db.Column(db.String(250), nullable=False)
     full_description = db.Column(db.String(500), nullable=False)
     category_title = db.Column(db.String(500), nullable=False)
+    # the date this record was created
     creation_date = db.Column(
         db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
 
@@ -30,6 +35,9 @@ class Diagnosis(db.Model):
 
 
 class DiagnosisSchema(ma.Schema):
+    """
+    Creates the diagnosis schema
+    """
     id = fields.Integer()
     category_code = fields.String(required=True, validate=validate.Length(1))
     diagnosis_code = fields.String(required=True, validate=validate.Length(1))

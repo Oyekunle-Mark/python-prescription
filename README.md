@@ -12,7 +12,7 @@ First, create a Pipenv shell with the command `pipenv shell` at the root of the 
 
 Run the following commands to create the migrations folder, migrate the db and populate the database.
 
-```
+```py
 python migrate.py db init
 python migrate.py db migrate
 python migrate.py db upgrade
